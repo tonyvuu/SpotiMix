@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Container, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap';
+import { FaMoon, FaSun } from 'react-icons/fa'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import fetchAll from './FetchAPI';
 import { ThemeContext } from '../App';  
-
 
 
 
@@ -45,10 +45,10 @@ function ArtistAlbum() {
     }
       
   }
-  const themeClass = isDarkMode ? 'dark' : 'light';
-
+  const themeSwitchText = isDarkMode ? 'Dark' : 'Light';
+  const themeSwitchIcon = isDarkMode ? <FaMoon /> : <FaSun />;
   return (
-    <div className={`App ${themeClass}`}>
+    <div className={`App ${isDarkMode ? 'dark' : 'light'}`}>
       <Container>
         <InputGroup className="m-3" size='lg'>
           <FormControl
@@ -64,16 +64,19 @@ function ArtistAlbum() {
           <Button className='search-bar' onClick={searchTracks}>Search Top Tracks</Button>
           
         </InputGroup>
-        <button onClick={toggleTheme}>
-        Toggle Theme: {isDarkMode ? 'Dark' : 'Light'}
-      </button>
+        <div className="theme-switch-container">
+          <span className="theme-switch-icon">{themeSwitchIcon}</span>
+          <span className="theme-switch-text" onClick={toggleTheme}>
+         {themeSwitchText}
+          </span>
+        </div>
       </Container>
       <Container>
         <Row className='mx-2 row row-cols-4'>
           {tracks.map((track, index) => {
             console.log(track);
             return (
-                <Card className={`tracks-container ${themeClass}`} key={index} onClick={toggleTheme}>
+                <Card className={`tracks-container ${isDarkMode ? 'dark' : 'light'}`} key={index}>
                 <Card.Img src={track.album.images[0].url} alt={track.name} />
                 <Card.Body>
                   <Card.Title>{track.name}</Card.Title>

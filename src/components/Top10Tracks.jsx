@@ -1,12 +1,17 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState, useEffect, useContext } from 'react';
 import { Container, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap';
-import { useState, useEffect } from 'react';
+import { FaMoon, FaSun } from 'react-icons/fa'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import fetchAll from './FetchAPI';  
+import { ThemeContext } from '../App';  
+
 
 function topTracks() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [topTracks, setTopTracks] = useState([]);
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+
 
 
   
@@ -40,11 +45,11 @@ function topTracks() {
     
       setTopTracks(artistTopTracks);
   }
-  // const response = await fetch("https://accounts.spotify.com/api/token", authParameters);
-  // const data = await response.json();
-  // return data.access_token;
+  const themeSwitchText = isDarkMode ? 'Dark' : 'Light';
+  const themeSwitchIcon = isDarkMode ? <FaMoon /> : <FaSun />;
+  
   return (
-    <div className='App'>
+    <div className={`App ${isDarkMode ? 'dark' : 'light'}`}>
       <Container>
         <InputGroup className="m-3" size='lg'>
           <FormControl 
@@ -59,12 +64,18 @@ function topTracks() {
           />
           <Button className='search-bar' onClick={searchAny}>Search 10 Top Ten</Button>        
         </InputGroup>
+        <div className="theme-switch-container">
+          <span className="theme-switch-icon">{themeSwitchIcon}</span>
+          <span className="theme-switch-text" onClick={toggleTheme}>
+         {themeSwitchText}
+          </span>
+      </div>
       </Container>
       <Container>
         <Row className='mx-2 row row-cols-4'>
           {topTracks.map((track, index) => (
-            <Card className='top-tracks' key={index}>
-              <Card.Img src={track.album.images[0].url} alt={`${track.name} album cover`} />
+        <Card className={`tracks-container ${isDarkMode ? 'dark' : 'light'}`} key={index}>
+        <Card.Img src={track.album.images[0].url} alt={`${track.name} album cover`} />
               <Card.Body>
                 <Card.Title>{track.name}</Card.Title>
                 <p>Artist: {track.artists[0].name}</p>
