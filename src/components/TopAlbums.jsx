@@ -58,10 +58,11 @@ const themeSwitchIcon = isDarkMode ? <FaMoon /> : <FaSun />;
   return (
     <div className={`App ${isDarkMode ? 'dark' : 'light'}`}>
     <Container>
-      <InputGroup className="m-3" size='lg'>
+    <InputGroup size='lg' className={`m-3 ${isDarkMode ? 'dark' : 'light'}`}>
         <FormControl 
         placeholder='Search for albums of an artist'
         type = "input"
+        className={`form-control-${isDarkMode ? 'dark' : 'light'}`} 
         onKeyPress={event => {
           if(event.key == "Enter") {
             searchAny()

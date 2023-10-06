@@ -111,4 +111,16 @@ body{
 .theme-switch-text {
   cursor: pointer;
 }
+.form-control-dark {
+  background-color: #343a40; /* Adjust background color for dark theme */
+  color: #ffffff; /* Adjust text color for dark theme */
+}
+
+.form-control-light {
+  background-color: #ffffff; /* Adjust background color for light theme */
+  color: #000000; /* Adjust text color for light theme */
+}
+.dark .form-control::placeholder {
+  color: #ffffff; /* Placeholder text color for dark theme */
+}
 

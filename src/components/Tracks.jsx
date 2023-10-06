@@ -50,10 +50,11 @@ function ArtistAlbum() {
   return (
     <div className={`App ${isDarkMode ? 'dark' : 'light'}`}>
       <Container>
-        <InputGroup className="m-3" size='lg'>
+      <InputGroup size='lg' className={`m-3 ${isDarkMode ? 'dark' : 'light'}`}>
           <FormControl
             placeholder='Search for tracks'
             type="input"
+            className={`form-control-${isDarkMode ? 'dark' : 'light'}`} // Dynamic class based on theme
             onKeyPress={event => {
               if (event.key === "Enter") {
                 searchTracks()
