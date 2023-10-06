@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap';
+import { FaMoon, FaSun } from 'react-icons/fa'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import fetchAll from './FetchAPI';
 import { ThemeContext } from '../App';  
+
 
 
 function artistAlbum() {
@@ -11,7 +13,6 @@ function artistAlbum() {
   const [albums, setAlbums] = useState([]);
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
-  
   
 
 
@@ -50,12 +51,12 @@ const searchAny = async () => {
     setAlbums(albumsData.items);
 }
 
-const themeClass = isDarkMode ? 'dark' : 'light';
-
+const themeSwitchText = isDarkMode ? 'Dark' : 'Light';
+const themeSwitchIcon = isDarkMode ? <FaMoon /> : <FaSun />;
 
 
   return (
-    <div className={`App ${themeClass}`}>
+    <div className={`App ${isDarkMode ? 'dark' : 'light'}`}>
     <Container>
       <InputGroup className="m-3" size='lg'>
         <FormControl 
@@ -70,15 +71,18 @@ const themeClass = isDarkMode ? 'dark' : 'light';
         />
       <Button className='search-bar' onClick={searchAny}>Search Albums</Button>        
       </InputGroup>
-      <button onClick={toggleTheme}>
-        Toggle Theme: {isDarkMode ? 'Dark' : 'Light'}
-      </button>
+      <div className="theme-switch-container">
+          <span className="theme-switch-icon">{themeSwitchIcon}</span>
+          <span className="theme-switch-text" onClick={toggleTheme}>
+         {themeSwitchText}
+          </span>
+      </div>
     </Container>
     <Container>
   <Row className='mx-2 row row-cols-4'>
     {albums.map((user, index) => {
       return (
-        <Card className={`tracks-container ${themeClass}`} key={index} onClick={toggleTheme}>
+        <Card className={`tracks-container ${isDarkMode ? 'dark' : 'light'}`} key={index}>
         <Card.Img src={user.images[0].url} />
           <Card.Body>
             <Card.Title>{user.name}</Card.Title>

@@ -98,3 +98,17 @@ body{
   color: #ffffff; 
 }
 
+.theme-switch-container {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 20px;
+}
+
+.theme-switch-icon {
+  margin-right: 10px;
+}
+
+.theme-switch-text {
+  cursor: pointer;
+}
+
