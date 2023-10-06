@@ -1,0 +1,83 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import fetchAll from './FetchAPI';  
+
+function topTracks() {
+  const [searchInput, setSearchInput] = useState("");
+  const [accessToken, setAccessToken] = useState("");
+  const [topTracks, setTopTracks] = useState([]);
+
+
+  
+  useEffect(() => {
+    const fetchData = async () => {
+        const token = await fetchAll();  // call fetchAll to get the access token
+        setAccessToken(token);
+      };
+
+    fetchData();  // call the fetchData function to fetch the access token
+  }, []);
+
+  const searchAny = async () => {
+    const searchArtistParameters = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + accessToken
+      }
+    };
+
+    // fetch artist ID
+      const artistResponse = await fetch(`https://api.spotify.com/v1/search?q=${searchInput}&type=artist`, searchArtistParameters);
+      const artistData = await artistResponse.json();
+      const artistID = artistData.artists.items[0].id;
+    
+    // fetch top tracks for the artist
+      const artistTopTracksResponse = await fetch(`https://api.spotify.com/v1/artists/${artistID}/top-tracks?country=US`, searchArtistParameters);
+      const artistTopTracksData = await artistTopTracksResponse.json();
+      const artistTopTracks = artistTopTracksData.tracks;
+    
+      setTopTracks(artistTopTracks);
+  }
+  // const response = await fetch("https://accounts.spotify.com/api/token", authParameters);
+  // const data = await response.json();
+  // return data.access_token;
+  return (
+    <div className='App'>
+      <Container>
+        <InputGroup className="m-3" size='lg'>
+          <FormControl 
+            placeholder='Search for top tracks'
+            type="input"
+            onKeyPress={event => {
+              if(event.key === "Enter") {
+                searchAny();
+              }
+            }}
+            onChange={e => setSearchInput(e.target.value)}
+          />
+          <Button onClick={searchAny}>Search</Button>        
+        </InputGroup>
+      </Container>
+      <Container>
+        <Row className='mx-2 row row-cols-4'>
+          {topTracks.map((track, index) => (
+            <Card key={index}>
+              <Card.Img src={track.album.images[0].url} alt={`${track.name} album cover`} />
+              <Card.Body>
+                <Card.Title>{track.name}</Card.Title>
+                <p>Artist: {track.artists[0].name}</p>
+                <p>Album: {track.album.name}</p>
+                <p>Release Date: {track.album.release_date}</p>
+
+              </Card.Body>
+            </Card>
+          ))}
+        </Row>
+      </Container>
+    </div>
+  );
+}
+
+export default topTracks;
