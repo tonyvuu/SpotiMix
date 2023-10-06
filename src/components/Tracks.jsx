@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Container, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import fetchAll from './FetchAPI';
+import { ThemeContext } from '../App';  
+
 
 
 
@@ -9,6 +11,8 @@ function ArtistAlbum() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [tracks, setTracks] = useState([]);
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,9 +45,10 @@ function ArtistAlbum() {
     }
       
   }
-  
+  const themeClass = isDarkMode ? 'dark' : 'light';
+
   return (
-    <div className='App'>
+    <div className={`App ${themeClass}`}>
       <Container>
         <InputGroup className="m-3" size='lg'>
           <FormControl
@@ -56,15 +61,19 @@ function ArtistAlbum() {
             }}
             onChange={e => setSearchInput(e.target.value)}
           />
-          <Button onClick={searchTracks}>Search Top Tracks</Button>
+          <Button className='search-bar' onClick={searchTracks}>Search Top Tracks</Button>
+          
         </InputGroup>
+        <button onClick={toggleTheme}>
+        Toggle Theme: {isDarkMode ? 'Dark' : 'Light'}
+      </button>
       </Container>
       <Container>
         <Row className='mx-2 row row-cols-4'>
           {tracks.map((track, index) => {
             console.log(track);
             return (
-              <Card key={index}>
+                <Card className={`tracks-container ${themeClass}`} key={index} onClick={toggleTheme}>
                 <Card.Img src={track.album.images[0].url} alt={track.name} />
                 <Card.Body>
                   <Card.Title>{track.name}</Card.Title>
@@ -78,6 +87,7 @@ function ArtistAlbum() {
         </Row>
       </Container>
     </div>
+    
   );
 }
 

@@ -64,3 +64,37 @@ font-weight: bold;
 color: #1DB954;
 margin-right: 100px;
 }
+
+body{
+  /* background-color: black; */
+}
+
+.search-bar {
+  background-color: #1DB954;
+  color: white;
+  font-weight: bold;
+}
+
+/* Light Theme Styles */
+.App.light {
+  background-color: #ffffff;
+  color: #000000; 
+}
+/* Dark Theme Styles */
+.App.dark {
+  background-color: #121212;
+  color: #ffffff; 
+}
+
+/* Light Theme Card Styles */
+.tracks-container.light {
+  background-color: #f9f9f9; 
+  color: #000000; 
+}
+
+/* Dark Theme Card Styles */
+.tracks-container.dark {
+  background-color: #292929; 
+  color: #ffffff; 
+}
+
