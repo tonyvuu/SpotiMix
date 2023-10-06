@@ -1,12 +1,17 @@
+import React, { useState, useEffect, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap';
-import { useState, useEffect } from 'react';
 import fetchAll from './FetchAPI';
+import { ThemeContext } from '../App';  
+
 
 function artistAlbum() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [albums, setAlbums] = useState([]);
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+
+  
   
 
 
@@ -45,15 +50,16 @@ const searchAny = async () => {
     setAlbums(albumsData.items);
 }
 
+const themeClass = isDarkMode ? 'dark' : 'light';
 
 
 
   return (
-    <div className='App'>
+    <div className={`App ${themeClass}`}>
     <Container>
       <InputGroup className="m-3" size='lg'>
         <FormControl 
-        placeholder='Search for artist'
+        placeholder='Search for albums of an artist'
         type = "input"
         onKeyPress={event => {
           if(event.key == "Enter") {
@@ -62,25 +68,26 @@ const searchAny = async () => {
         }}
         onChange={e => setSearchInput(e.target.value)}
         />
-      <Button onClick={searchAny}>Search</Button>        
+      <Button className='search-bar' onClick={searchAny}>Search Albums</Button>        
       </InputGroup>
+      <button onClick={toggleTheme}>
+        Toggle Theme: {isDarkMode ? 'Dark' : 'Light'}
+      </button>
     </Container>
     <Container>
-      <Row className='mx-2 row row-cols-4'>
-        {albums.map((user,index) => {
-          console.log(user)
-          return(
-        <Card >
-          <Card.Img src = {user.images[0].url}/>
+  <Row className='mx-2 row row-cols-4'>
+    {albums.map((user, index) => {
+      return (
+        <Card className={`tracks-container ${themeClass}`} key={index} onClick={toggleTheme}>
+        <Card.Img src={user.images[0].url} />
           <Card.Body>
-          <Card.Title>{user.name}</Card.Title>
-          {/* <p>{user.release_date}</p> */}
+            <Card.Title>{user.name}</Card.Title>
           </Card.Body>
         </Card>
-          )
-        })}
-      </Row>
-    </Container>
+      );
+    })}
+  </Row>
+</Container>
 
     </div>
   )}

@@ -48,7 +48,7 @@ function topTracks() {
       <Container>
         <InputGroup className="m-3" size='lg'>
           <FormControl 
-            placeholder='Search for top tracks'
+            placeholder='Search for top tracks of an artist'
             type="input"
             onKeyPress={event => {
               if(event.key === "Enter") {
@@ -57,13 +57,13 @@ function topTracks() {
             }}
             onChange={e => setSearchInput(e.target.value)}
           />
-          <Button onClick={searchAny}>Search</Button>        
+          <Button className='search-bar' onClick={searchAny}>Search 10 Top Ten</Button>        
         </InputGroup>
       </Container>
       <Container>
         <Row className='mx-2 row row-cols-4'>
           {topTracks.map((track, index) => (
-            <Card key={index}>
+            <Card className='top-tracks' key={index}>
               <Card.Img src={track.album.images[0].url} alt={`${track.name} album cover`} />
               <Card.Body>
                 <Card.Title>{track.name}</Card.Title>
