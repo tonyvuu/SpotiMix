@@ -9,6 +9,7 @@ import Top10Tracks from './components/Top10Tracks';
 import TopAlbums from './components/TopAlbums';
 import Tracks from './components/Tracks';
 import Home from './components/Home';
+import Savedlist from './components/Savedlist';
 
 export const ThemeContext = createContext();
 
@@ -51,6 +52,9 @@ function App() {
               <Nav.Link as={Link} to="/topalbums">
                 Albums of an Artist
               </Nav.Link>
+              <Nav.Link as={Link} to="/saved">
+                Saved Music
+              </Nav.Link>
             </Nav>
           </Container>
         </Navbar>
@@ -60,6 +64,8 @@ function App() {
           <Route path="/tracks" element={<Tracks />} />
           <Route path="/toptracks" element={<Top10Tracks />} />
           <Route path="/topalbums" element={<TopAlbums />} />
+          <Route path="/saved" element={<Savedlist />} />
+
         </Routes>
       </div>
       </ThemeProvider>
