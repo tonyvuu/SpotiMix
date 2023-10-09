@@ -62,12 +62,9 @@ color: white
 .nav-link{
 font-weight: bold;
 color: #1DB954;
-margin-right: 100px;
+margin-right: 90px;
 }
 
-body{
-  /* background-color: black; */
-}
 
 .search-bar {
   background-color: #1DB954;
@@ -112,15 +109,19 @@ body{
   cursor: pointer;
 }
 .form-control-dark {
-  background-color: #343a40; /* Adjust background color for dark theme */
-  color: #ffffff; /* Adjust text color for dark theme */
+  background-color: #343a40; /* adjust background color for dark theme */
+  color: #ffffff; /* adjust text color for dark theme */
 }
 
 .form-control-light {
-  background-color: #ffffff; /* Adjust background color for light theme */
-  color: #000000; /* Adjust text color for light theme */
+  background-color: #ffffff; /* adjust background color for light theme */
+  color: #000000; /* adjust text color for light theme */
 }
 .dark .form-control::placeholder {
-  color: #ffffff; /* Placeholder text color for dark theme */
+  color: #ffffff; /* placeholder text color for dark theme */
+}
+
+.title-homepage{
+  margin-top: 30px;
 }
 

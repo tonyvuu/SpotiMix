@@ -4,7 +4,9 @@ import '../css/Home.css'
 
 function Home() {
   return (
-    <div>Home
+    <div>
+        <h1 className='title-homepage'>Welcome to SpotiMix</h1>
+
     </div>
   )
 }
