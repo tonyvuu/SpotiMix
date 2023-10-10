@@ -12,6 +12,7 @@ function topTracks() {
   const [topTracks, setTopTracks] = useState([]);
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
+  document.body.style.backgroundColor = isDarkMode ? '#000' : '#fff';
 
 
   
@@ -46,12 +47,12 @@ function topTracks() {
       setTopTracks(artistTopTracks);
   }
   const themeSwitchText = isDarkMode ? 'Dark' : 'Light';
-  const themeSwitchIcon = isDarkMode ? <FaMoon /> : <FaSun />;
+  const themeSwitchIcon = isDarkMode ? <FaMoon color="#fff" /> : <FaSun color="#000" />;
   
   return (
-    <div className={`App ${isDarkMode ? 'dark' : 'light'}`}>
+    <div>
       <Container>
-      <InputGroup size='lg' className={`m-3 ${isDarkMode ? 'dark' : 'light'}`}>
+      <InputGroup size='lg' className={`m-3`}>
           <FormControl 
             placeholder='Search for top tracks of an artist'
             type="input"
@@ -66,9 +67,9 @@ function topTracks() {
           <Button className='search-bar' onClick={searchAny}>Search 10 Top Ten</Button>        
         </InputGroup>
         <div className="theme-switch-container">
-          <span className="theme-switch-icon">{themeSwitchIcon}</span>
-          <span className="theme-switch-text" onClick={toggleTheme}>
-         {themeSwitchText}
+        <span className="theme-switch-icon" onClick={toggleTheme}>{themeSwitchIcon}</span>
+        <span className={`theme-switch-text ${isDarkMode ? 'text-white' : 'text-dark'}`} onClick={toggleTheme}>
+            {themeSwitchText}
           </span>
       </div>
       </Container>

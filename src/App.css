@@ -72,16 +72,16 @@ margin-right: 90px;
   font-weight: bold;
 }
 
-/* Light Theme Styles */
+/* Light Theme Styles */ */
 .App.light {
-  background-color: #ffffff;
-  color: #000000; 
+  /* background-color: #ffffff; */
+  color: #000000;  
 }
 /* Dark Theme Styles */
 .App.dark {
-  background-color: #121212;
+  /* background-color: #121212; */
   color: #ffffff; 
-}
+} 
 
 /* Light Theme Card Styles */
 .tracks-container.light {
@@ -124,4 +124,18 @@ margin-right: 90px;
 .title-homepage{
   margin-top: 30px;
 }
+
+.success-message{
+  color: green;
+}
+
+.form-control-light::placeholder {
+  color: black;
+}
+
+.form-control-dark::placeholder {
+  color: white;
+}
+/* Add this to your CSS file */
+
 
