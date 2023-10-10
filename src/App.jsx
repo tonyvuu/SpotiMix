@@ -30,6 +30,11 @@ const ThemeProvider = ({ children }) => {
 
 
 function App() {
+  const [information, setInformation] = useState([]);
+
+  const updateInformation = (newTrackInfo) => {
+    setInformation(prevInformation => [...prevInformation, newTrackInfo]);
+  };
   return (
     <ThemeProvider>
 
@@ -60,13 +65,12 @@ function App() {
         </Navbar>
 
         <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/tracks" element={<Tracks />} />
-          <Route path="/toptracks" element={<Top10Tracks />} />
-          <Route path="/topalbums" element={<TopAlbums />} />
-          <Route path="/saved" element={<Savedlist />} />
-
-        </Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/saved" element={<Savedlist savedTrackInfo={information} />} /> 
+        <Route path="/tracks" element={<Tracks information={information} updateInformation={updateInformation} />} />
+        <Route path="/toptracks" element={<Top10Tracks information={information} updateInformation={updateInformation} />} />
+        <Route path="/topalbums" element={<TopAlbums information={information} updateInformation={updateInformation} />} />
+      </Routes>
       </div>
       </ThemeProvider>
 

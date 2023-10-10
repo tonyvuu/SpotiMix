@@ -7,11 +7,13 @@ import { ThemeContext } from '../App';
 
 
 
-function ArtistAlbum() {
+function ArtistAlbum({updateInformation}) {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [tracks, setTracks] = useState([]);
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+  const [savedTracks, setSavedTracks] = useState([]);
+
 
 
   useEffect(() => {
@@ -22,6 +24,8 @@ function ArtistAlbum() {
 
     fetchData();  // call the fetchData function to fetch the access token
   }, []);
+
+  // const addTrackstoList
 
   const searchTracks = async () => {
     if (!accessToken) {
@@ -47,6 +51,22 @@ function ArtistAlbum() {
   }
   const themeSwitchText = isDarkMode ? 'Dark' : 'Light';
   const themeSwitchIcon = isDarkMode ? <FaMoon /> : <FaSun />;
+
+  const handleSaveTrack = (track) => {
+    // extract these specific information from the track
+    const trackInfo = {
+      name: track.name,
+      artists: track.artists.map(artist => artist.name).join(', '),
+      releaseDate: track.album.release_date,
+      imageUrl: track.album.images[0].url,
+    };
+  
+    // call the updateInformation function to save track information
+    updateInformation(trackInfo);
+    // call the setSavedTracks function to save track information with previous track information 
+    setSavedTracks([...savedTracks, trackInfo]);
+
+  };
   return (
     <div className={`App ${isDarkMode ? 'dark' : 'light'}`}>
       <Container>
@@ -82,9 +102,15 @@ function ArtistAlbum() {
                 <Card.Body>
                   <Card.Title>{track.name}</Card.Title>
                   <Card.Text>Artists: {track.artists.map(artist => artist.name).join(', ')}</Card.Text>
-                  <Card.Text>Release Date: {track.album.release_date}</Card.Text>
-
+                  <Card.Text>Release Date: {track.album.release_date}
+                  </Card.Text>
+                  {/* Show success message if the track is saved */}
+                {savedTracks.find(savedTrack => savedTrack.name === track.name) && (
+                    <div className='success-message'>Saved successfully!</div>
+                    )}
                 </Card.Body>
+                <Button onClick={() => handleSaveTrack(track)}>Save Track</Button>
+
               </Card>
             )
           })}
@@ -96,3 +122,4 @@ function ArtistAlbum() {
 }
 
 export default ArtistAlbum;
+
