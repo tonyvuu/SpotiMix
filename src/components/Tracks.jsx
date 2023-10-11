@@ -95,6 +95,7 @@ function findTracks({ updateInformation }) {
                 <Card.Text>Release Date: {track.album.release_date}</Card.Text>
                 {savedTracks.find(savedTrack => savedTrack.name === track.name) && (
                   <div className='success-message'>Saved successfully!</div>
+            
                 )}
               </Card.Body>
               <Button className='save-track-button' onClick={() => handleSaveTrack(track)}>Save Track</Button>
