@@ -62,6 +62,12 @@ function findTracks({ updateInformation }) {
 
   return (
     <div>
+       <div className="theme-switch-container">
+        <span className="theme-switch-icon" onClick={toggleTheme}>{themeSwitchIcon}</span>
+        <span className={`theme-switch-text ${isDarkMode ? 'text-white' : 'text-dark'}`} onClick={toggleTheme}>
+            {themeSwitchText}
+          </span>
+      </div>
       <Container>
         <InputGroup size='lg' className={`m-3`}>
           <FormControl
@@ -77,12 +83,6 @@ function findTracks({ updateInformation }) {
           />
           <Button className='search-bar' onClick={searchTracks}>Search Top Tracks</Button>
         </InputGroup>
-        <div className="theme-switch-container">
-        <span className="theme-switch-icon" onClick={toggleTheme}>{themeSwitchIcon}</span>
-          <span className={`theme-switch-text ${isDarkMode ? 'text-white' : 'text-dark'}`} onClick={toggleTheme}>
-            {themeSwitchText}
-          </span>
-        </div>
       </Container>
       <Container>
         <Row className='mx-2 row row-cols-4'>
@@ -97,7 +97,7 @@ function findTracks({ updateInformation }) {
                   <div className='success-message'>Saved successfully!</div>
                 )}
               </Card.Body>
-              <Button onClick={() => handleSaveTrack(track)}>Save Track</Button>
+              <Button className='save-track-button' onClick={() => handleSaveTrack(track)}>Save Track</Button>
             </Card>
           ))}
         </Row>

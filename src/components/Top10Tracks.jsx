@@ -51,6 +51,12 @@ function topTracks() {
   
   return (
     <div>
+       <div className="theme-switch-container">
+        <span className="theme-switch-icon" onClick={toggleTheme}>{themeSwitchIcon}</span>
+        <span className={`theme-switch-text ${isDarkMode ? 'text-white' : 'text-dark'}`} onClick={toggleTheme}>
+            {themeSwitchText}
+          </span>
+      </div>
       <Container>
       <InputGroup size='lg' className={`m-3`}>
           <FormControl 
@@ -66,12 +72,6 @@ function topTracks() {
           />
           <Button className='search-bar' onClick={searchAny}>Search 10 Top Ten</Button>        
         </InputGroup>
-        <div className="theme-switch-container">
-        <span className="theme-switch-icon" onClick={toggleTheme}>{themeSwitchIcon}</span>
-        <span className={`theme-switch-text ${isDarkMode ? 'text-white' : 'text-dark'}`} onClick={toggleTheme}>
-            {themeSwitchText}
-          </span>
-      </div>
       </Container>
       <Container>
         <Row className='mx-2 row row-cols-4'>
