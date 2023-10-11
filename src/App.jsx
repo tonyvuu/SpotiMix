@@ -69,7 +69,7 @@ function App() {
         <Route path="/saved" element={<Savedlist savedTrackInfo={information} />} /> 
         <Route path="/tracks" element={<Tracks information={information} updateInformation={updateInformation} />} />
         <Route path="/toptracks" element={<Top10Tracks information={information} updateInformation={updateInformation} />} />
-        <Route path="/topalbums" element={<TopAlbums information={information} updateInformation={updateInformation} />} />
+        <Route path="/topalbums" element={<TopAlbums information={information} updateAlbum={updateInformation} />} />
       </Routes>
       </div>
       </ThemeProvider>

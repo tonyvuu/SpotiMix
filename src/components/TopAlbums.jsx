@@ -7,11 +7,13 @@ import { ThemeContext } from '../App';
 
 
 
-function artistAlbum() {
+function artistAlbum({updateAlbum}) {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [albums, setAlbums] = useState([]);
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+  const [savedAlbums, setSavedAlbums] = useState([]);
+
 
   
   document.body.style.backgroundColor = isDarkMode ? '#000' : '#fff';
@@ -55,9 +57,27 @@ const searchAny = async () => {
 const themeSwitchText = isDarkMode ? 'Dark' : 'Light';
 const themeSwitchIcon = isDarkMode ? <FaMoon color="#fff" /> : <FaSun color="#000" />;
 
+const handleSaveAlbum = (album) => {
+  // create an album info object
+  const albumInfo = {
+    name: album.name,
+    artist: album.artists[0].name,
+    releaseDate: album.release_date,
+    imageUrl: album.images[0].url,
+  };
+  updateAlbum(albumInfo)
+  setSavedAlbums([...savedAlbums, albumInfo]);
+};
+
 
   return (
     <div>
+       <div className="theme-switch-container">
+        <span className="theme-switch-icon" onClick={toggleTheme}>{themeSwitchIcon}</span>
+        <span className={`theme-switch-text ${isDarkMode ? 'text-white' : 'text-dark'}`} onClick={toggleTheme}>
+            {themeSwitchText}
+          </span>
+      </div>
     <Container>
     <InputGroup size='lg' className={`m-3`}>
         <FormControl 
@@ -73,12 +93,6 @@ const themeSwitchIcon = isDarkMode ? <FaMoon color="#fff" /> : <FaSun color="#00
         />
       <Button className='search-bar' onClick={searchAny}>Search Albums</Button>        
       </InputGroup>
-      <div className="theme-switch-container">
-      <span className="theme-switch-icon" onClick={toggleTheme}>{themeSwitchIcon}</span>
-           <span className={`theme-switch-text ${isDarkMode ? 'text-white' : 'text-dark'}`} onClick={toggleTheme}>
-            {themeSwitchText}
-          </span>
-      </div>
     </Container>
     <Container>
   <Row className='mx-2 row row-cols-4'>
@@ -88,7 +102,13 @@ const themeSwitchIcon = isDarkMode ? <FaMoon color="#fff" /> : <FaSun color="#00
         <Card.Img src={user.images[0].url} />
           <Card.Body>
             <Card.Title>{user.name}</Card.Title>
+            <p>Artist: {user.artists[0].name}</p>
+            <p>Total Tracks: {user.total_tracks}</p>
+            <p>Release Date: {user.release_date}</p>
+            {/* <p>Type: {user.type}</p> */}
+
           </Card.Body>
+          <Button className='save-album-button' onClick={() => handleSaveAlbum(user)}>Save Album</Button>
         </Card>
       );
     })}

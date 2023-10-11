@@ -1,0 +1,11 @@
+.section-home2{
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    margin: 50px;
+  }
+
+  .fetch-button{
+    background-color: #1DB954;
+}

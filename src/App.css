@@ -72,24 +72,24 @@ margin-right: 90px;
   font-weight: bold;
 }
 
-/* Light Theme Styles */ */
+/* light Theme Styles */ */
 .App.light {
   /* background-color: #ffffff; */
   color: #000000;  
 }
-/* Dark Theme Styles */
+/* dark Theme Styles */
 .App.dark {
   /* background-color: #121212; */
   color: #ffffff; 
 } 
 
-/* Light Theme Card Styles */
+/* light Theme Card Styles */
 .tracks-container.light {
   background-color: #f9f9f9; 
   color: #000000; 
 }
 
-/* Dark Theme Card Styles */
+/* dark Theme Card Styles */
 .tracks-container.dark {
   background-color: #292929; 
   color: #ffffff; 
@@ -98,7 +98,9 @@ margin-right: 90px;
 .theme-switch-container {
   display: flex;
   justify-content: end;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+  margin-top: 10px;
+  margin-right: 20px;
 }
 
 .theme-switch-icon {
@@ -138,4 +140,7 @@ margin-right: 90px;
 }
 /* Add this to your CSS file */
 
+.save-track-button{
+  background-color: #1DB954;
+}
 
