@@ -10,6 +10,7 @@ import TopAlbums from './components/TopAlbums';
 import Tracks from './components/Tracks';
 import Home from './components/Home';
 import Savedlist from './components/Savedlist';
+import Saved5limit from './components/Saved5limit'
 
 export const ThemeContext = createContext();
 
@@ -60,13 +61,17 @@ function App() {
               <Nav.Link as={Link} to="/saved">
                 Saved Music
               </Nav.Link>
+              {/* <Nav.Link as={Link} to="/premium">
+                Premium Saved Music
+              </Nav.Link> */}
             </Nav>
           </Container>
         </Navbar>
 
         <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/saved" element={<Savedlist savedTrackInfo={information} />} /> 
+        <Route path="/saved" element={<Saved5limit savedTrackInfo={information} />} /> 
+        <Route path="/premium" element={<Savedlist savedTrackInfo={information} />} /> 
         <Route path="/tracks" element={<Tracks information={information} updateInformation={updateInformation} />} />
         <Route path="/toptracks" element={<Top10Tracks information={information} updateInformation={updateInformation} />} />
         <Route path="/topalbums" element={<TopAlbums information={information} updateAlbum={updateInformation} />} />
