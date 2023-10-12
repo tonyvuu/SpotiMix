@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Container, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap';
 import { FaMoon, FaSun } from 'react-icons/fa'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import fetchAll from './FetchAPI';
+// import fetchAll from './FetchAPI';
 import { ThemeContext } from '../App';  
 
 
@@ -18,6 +18,20 @@ function artistAlbum({updateAlbum}) {
   
   document.body.style.backgroundColor = isDarkMode ? '#000' : '#fff';
 
+  const fetchAll = async () => {
+    const authParameters = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: 'grant_type=client_credentials&client_id=' + import.meta.env.VITE_REACT_APP_CLIENT_ID + '&client_secret=' + import.meta.env.VITE_REACT_APP_CLIENT_SECRET
+    };
+  
+      const response = await fetch("https://accounts.spotify.com/api/token", authParameters);
+      const data = await response.json();
+      return data.access_token;
+  };
+  
 
   useEffect(() => {
     const fetchData = async () => {
