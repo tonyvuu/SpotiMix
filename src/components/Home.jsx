@@ -63,7 +63,7 @@ function Recommendations() {
       <section className={`section-home ${isDarkMode ? 'text-white' : 'text-dark'}`}>
         <div className='section-home2'>
         <h1 className='mb-5'>Welcome to Our Music Platform</h1>
-        <p>Uncover the world of music at your fingertips. Our platform offers an extensive music library where you can effortlessly search for your preferred tracks and albums. Dive into the discography of your beloved artists, discovering their top 10 tracks with just a few clicks. The journey through melodies, beats, and rhythms is made simple and enjoyable with our user-friendly interface, ensuring you can navigate through your music choices easily. hi</p>
+        <p>Uncover the world of music at your fingertips. Our platform offers an extensive music library where you can effortlessly search for your preferred tracks and albums. Dive into the discography of your beloved artists, discovering their top 10 tracks with just a few clicks. The journey through melodies, beats, and rhythms is made simple and enjoyable with our user-friendly interface, ensuring you can navigate through your music choices easily. Enjoy!</p>
         </div>
       </section>
       <Container>
