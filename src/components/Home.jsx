@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Container, Card, Button, Row } from 'react-bootstrap';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import fetchAll from './FetchAPI';
+// import fetchAll from './FetchAPI';
 import { ThemeContext } from '../App';
 import '../css/Home.css'
 
