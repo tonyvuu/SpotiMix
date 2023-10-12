@@ -28,7 +28,7 @@ function Recommendations() {
       return;
     }
 
-    // example seed track IDs (replace with actual track IDs)
+    // example seed track IDs 
     const seedTracks = '4xqrdfXkTW4T0RauPLv3WA';
 
     const recommendationParameters = {
