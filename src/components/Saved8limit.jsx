@@ -3,7 +3,7 @@ import { Container, Row, Card, Button } from 'react-bootstrap';
 import { ThemeContext } from '../App';
 import { FaMoon, FaSun } from 'react-icons/fa';
 
-function SavedMusic({ savedTrackInfo, savedAlbumInfo }) {
+function SavedMusic({ savedTrackInfo, savedAlbumInfo, updateTopTracks }) {
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
   document.body.style.backgroundColor = isDarkMode ? '#000' : '#fff';
@@ -11,7 +11,7 @@ function SavedMusic({ savedTrackInfo, savedAlbumInfo }) {
   const themeSwitchText = isDarkMode ? 'Dark' : 'Light';
   const themeSwitchIcon = isDarkMode ? <FaMoon color="#fff" /> : <FaSun color="#000" />;
 
-  const limit = 5;
+  const limit = 8;
 
   const handleClickPremiumFeature = () => {
     window.location.href = 'https://buy.stripe.com/test_14k8yg5cy3St3zG6op';
@@ -53,8 +53,8 @@ function SavedMusic({ savedTrackInfo, savedAlbumInfo }) {
               </Card>
             ))}
         </Row>
-        <h1>You only get 5 free saved songs</h1>
-        <Button onClick={handleClickPremiumFeature}>Click here for unlimited adds</Button>
+        <h3 className='free-8'>You only get 8 free saved songs</h3>
+        <Button className='save-track-button' onClick={handleClickPremiumFeature}>Click here for unlimited adds</Button>
         <Row>
           {savedAlbumInfo &&
             savedAlbumInfo.slice(0, limit).map((album, index) => (
@@ -71,6 +71,27 @@ function SavedMusic({ savedTrackInfo, savedAlbumInfo }) {
                   </Card.Text>
                   <Card.Text className={isDarkMode ? '' : 'text-dark'}>
                     Release Date: {album.releaseDate}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            ))}
+        </Row>
+        <Row>
+          {updateTopTracks &&
+            updateTopTracks.slice(0, limit).map((track, index) => (
+              <Card
+                className={`tracks-container ${isDarkMode ? 'dark' : 'light'}`}
+                key={index}
+                style={{ width: '18rem' }}
+              >
+                <Card.Img variant="top" src={track.imageUrl} alt={track.name} />
+                <Card.Body>
+                  <Card.Title>{track.name}</Card.Title>
+                  <Card.Text className={isDarkMode ? '' : 'text-dark'}>
+                    Artists: {track.artists}
+                  </Card.Text>
+                  <Card.Text className={isDarkMode ? '' : 'text-dark'}>
+                    Release Date: {track.releaseDate}
                   </Card.Text>
                 </Card.Body>
               </Card>

@@ -23,6 +23,8 @@ function FindTracks() {
     fetchData();  // call the fetchData function to fetch the access token
   }, []);
 
+  const [showSavedMessage, setShowSavedMessage] = useState({});
+
   const searchTracks = async () => {
     if (!accessToken) {
       console.error("access token not available");
@@ -55,9 +57,23 @@ function FindTracks() {
       imageUrl: track.album.images[0].url,
     };
 
-    // Check if the track is already saved
+    // check if the track is already saved
     if (!savedTracks.find(savedTrack => savedTrack.name === trackInfo.name)) {
       setSavedTracks([...savedTracks, trackInfo]);
+
+      // show the "Saved successfully" message for this track
+      setShowSavedMessage(prevState => ({
+        ...prevState,
+        [track.name]: true,
+      }));
+
+      // Hide the "Saved successfully" message after a short delay
+      setTimeout(() => {
+        setShowSavedMessage(prevState => ({
+          ...prevState,
+          [track.name]: false,
+        }));
+      }, 5000);
     }
   };
 
@@ -94,12 +110,9 @@ function FindTracks() {
                 <Card.Title>{track.name}</Card.Title>
                 <Card.Text>Artists: {track.artists.map(artist => artist.name).join(', ')}</Card.Text>
                 <Card.Text>Release Date: {track.album.release_date}</Card.Text>
-                {savedTracks.find(savedTrack => savedTrack.name === track.name) ? (
-                  <div className='success-message'>Saved successfully!</div>
-                ) : (
-                  <Button className='save-track-button' onClick={() => handleSaveTrack(track)}>Save Track</Button>
-                )}
+                {showSavedMessage[track.name] && <div className='success-message'>Saved successfully!</div>}
               </Card.Body>
+              <Button className='save-track-button' onClick={() => handleSaveTrack(track)}>Save Track</Button>
             </Card>
           ))}
         </Row>
@@ -107,6 +120,8 @@ function FindTracks() {
       <Container>
         <h2 className={`${isDarkMode ? 'text-white' : 'text-dark'}`}>Saved Tracks</h2>
         <Row className='mx-2 row row-cols-4'>
+         
+
           {savedTracks.map((savedTrack, index) => (
             <Card className={`tracks-container ${isDarkMode ? 'dark' : 'light'}`} key={index}>
               <Card.Img src={savedTrack.imageUrl} alt={savedTrack.name} />

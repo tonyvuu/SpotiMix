@@ -4,6 +4,8 @@
     flex-wrap: wrap;
     text-align: center;
     margin: 50px;
+    font-family: 'Poppins', sans-serif;
+
   }
 
   .fetch-button{

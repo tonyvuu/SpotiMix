@@ -5,16 +5,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import fetchAll from './FetchAPI';
 import { ThemeContext } from '../App';
 
-function findTracks({ updateInformation }) {
+function FindTracks({ updateInformation }) {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [tracks, setTracks] = useState([]);
-  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
   const [savedTracks, setSavedTracks] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
-    document.body.style.backgroundColor = isDarkMode ? '#000' : '#fff';
-    
-
+  document.body.style.backgroundColor = isDarkMode ? '#000' : '#fff';
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,6 +49,15 @@ function findTracks({ updateInformation }) {
   const themeSwitchIcon = isDarkMode ? <FaMoon color="#fff" /> : <FaSun color="#000" />;
 
   const handleSaveTrack = (track) => {
+    if (savedTracks.find(savedTrack => savedTrack.name === track.name)) {
+      console.log('Track is already saved:', track.name);
+      setErrorMessage({ id: track.id, message: 'Track is already saved.' });
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 10000);
+      return;
+    }
+
     const trackInfo = {
       name: track.name,
       artists: track.artists.map(artist => artist.name).join(', '),
@@ -63,11 +71,11 @@ function findTracks({ updateInformation }) {
 
   return (
     <div>
-       <div className="theme-switch-container">
+      <div className="theme-switch-container">
         <span className="theme-switch-icon" onClick={toggleTheme}>{themeSwitchIcon}</span>
         <span className={`theme-switch-text ${isDarkMode ? 'text-white' : 'text-dark'}`} onClick={toggleTheme}>
-            {themeSwitchText}
-          </span>
+          {themeSwitchText}
+        </span>
       </div>
       <Container>
         <InputGroup size='lg' className={`m-3`}>
@@ -94,10 +102,14 @@ function findTracks({ updateInformation }) {
                 <Card.Title>{track.name}</Card.Title>
                 <Card.Text>Artists: {track.artists.map(artist => artist.name).join(', ')}</Card.Text>
                 <Card.Text>Release Date: {track.album.release_date}</Card.Text>
+
+
                 {savedTracks.find(savedTrack => savedTrack.name === track.name) && (
                   <div className='success-message'>Saved successfully!</div>
-            
-                )}
+                  )}
+                  {errorMessage && errorMessage.id === track.id && (
+                    <div className='error-message'>{errorMessage.message}</div>
+                  )}
               </Card.Body>
               <Button className='save-track-button' onClick={() => handleSaveTrack(track)}>Save Track</Button>
             </Card>
@@ -108,4 +120,4 @@ function findTracks({ updateInformation }) {
   );
 }
 
-export default findTracks;
+export default FindTracks;

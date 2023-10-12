@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&family=Roboto&display=swap');
+
 #root {
   /* max-width: 1280px; */
   margin: 0 auto;
@@ -72,24 +74,23 @@ margin-right: 90px;
   font-weight: bold;
 }
 
-/* light Theme Styles */ */
 .App.light {
-  /* background-color: #ffffff; */
   color: #000000;  
 }
-/* dark Theme Styles */
 .App.dark {
-  /* background-color: #121212; */
   color: #ffffff; 
 } 
 
-/* light Theme Card Styles */
 .tracks-container.light {
   background-color: #f9f9f9; 
   color: #000000; 
 }
 
-/* dark Theme Card Styles */
+.tracks-container{
+  font-family: 'Poppins', sans-serif;
+
+}
+
 .tracks-container.dark {
   background-color: #292929; 
   color: #ffffff; 
@@ -138,9 +139,16 @@ margin-right: 90px;
 .form-control-dark::placeholder {
   color: white;
 }
-/* Add this to your CSS file */
 
 .save-track-button{
   background-color: #1DB954;
 }
 
+.error-message{
+  color: red;
+}
+
+.free-8{
+margin-top: 50px;
+margin-bottom: 30px;
+}
