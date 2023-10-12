@@ -1,5 +1,4 @@
 const fetchAll = async () => {
-  
   const authParameters = {
     method: 'POST',
     headers: {
