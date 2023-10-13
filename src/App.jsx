@@ -45,7 +45,7 @@ function App() {
             <Navbar.Brand className='navbar-title-icon' as={Link} to="/home">
               SpotiMix <img className='image-title' src="https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-download-logo-30.png" alt="Spotify Logo" />
             </Navbar.Brand>
-            <Nav.Link as={Link} to="/home">
+            <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
             <Nav className="me-auto">
@@ -69,7 +69,7 @@ function App() {
         </Navbar>
 
         <Routes>
-        <Route path="/home" element={<Home updateRecommendations={updateInformation}/>} />
+        <Route path="/" element={<Home updateRecommendations={updateInformation}/>} />
         <Route path="/saved" element={<Saved8limit savedTrackInfo={information} />} /> 
         <Route path="/premium" element={<Savedlist savedTrackInfo={information} />} /> 
         <Route path="/tracks" element={<Tracks updateInformation={updateInformation} />} />
