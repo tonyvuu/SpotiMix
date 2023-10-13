@@ -38,7 +38,7 @@ SpotiMix is a React-based web application that leverages the Spotify API to prov
 * React Router: React Router is employed to handle routing within the application, enabling navigation between different pages and components.
 * Stripe: Integration with Stripe enables a seamless payment experience, allowing users to upgrade to a premium plan for unlimited saves at just $5.
 
-Features
+### Features
 * Light and Dark Theme: The application offers users the choice of a light or dark theme to personalize their experience. This choice is persisted across different sessions.
 * Track Saving: Users can save up to 8 tracks for free. The application facilitates a smooth process to save and manage their favorite tracks.
 * Stripe Integration: Users can opt for a premium plan by making a one-time payment of $5 through the integrated Stripe payment gateway. This upgrade allows unlimited track saves.

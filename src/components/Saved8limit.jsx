@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Container, Row, Card, Button } from 'react-bootstrap';
 import { ThemeContext } from '../App';
 import { FaMoon, FaSun } from 'react-icons/fa';
 
-function Saved8limit({ savedTrackInfo, savedAlbumInfo, updateTopTracks, updateRecommendations }) {
+function Saved8limit({ savedTrackInfo, savedAlbumInfo, updateTopTracks, updateRecommendations, onDeleteTrack }) {
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+  // const [savedTracks, setSavedTracks] = useState([]);
 
   document.body.style.backgroundColor = isDarkMode ? '#000' : '#fff';
 
@@ -23,15 +24,12 @@ function Saved8limit({ savedTrackInfo, savedAlbumInfo, updateTopTracks, updateRe
         <span className="theme-switch-icon" onClick={toggleTheme}>
           {themeSwitchIcon}
         </span>
-        <span
-          className={`theme-switch-text ${isDarkMode ? 'text-white' : 'text-dark'}`}
-          onClick={toggleTheme}
-        >
+        <span className={`theme-switch-text ${isDarkMode ? 'text-white' : 'text-dark'}`} onClick={toggleTheme}>
           {themeSwitchText}
         </span>
       </div>
       <Container>
-        <h2 className={`mt-3 ${isDarkMode ? 'text-white' : 'text-dark'}`}>Saved Music Tracks</h2>
+        <h2 className={`header-3 mt-3 ${isDarkMode ? 'text-white' : 'text-dark'}`}>Saved Music Tracks</h2>
         <Row>
           {savedTrackInfo &&
             savedTrackInfo.slice(0, limit).map((track, index) => (
@@ -49,11 +47,12 @@ function Saved8limit({ savedTrackInfo, savedAlbumInfo, updateTopTracks, updateRe
                   <Card.Text className={isDarkMode ? '' : 'text-dark'}>
                     Release Date: {track.releaseDate}
                   </Card.Text>
+                  {/* <Button onClick={() => handleDeleteTrack(track)}>Delete</Button> */}
                 </Card.Body>
               </Card>
             ))}
         </Row>
-        <h3 className='free-8'>You only get 8 free saved songs</h3>
+        <h4 className={`free-8 ${isDarkMode ? 'text-white' : 'text-dark'}`}>You only get 8 free saved songs</h4>
         <Button className='save-track-button' onClick={handleClickPremiumFeature}>Click here for unlimited adds</Button>
         <Row>
           {savedAlbumInfo &&

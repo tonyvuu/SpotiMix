@@ -10,7 +10,7 @@ import TopAlbums from './components/TopAlbums';
 import Tracks from './components/Tracks';
 import Home from './components/Home';
 import Savedlist from './components/Savedlist';
-import Saved5limit from './components/Saved8limit'
+import Saved8limit from './components/Saved8limit'
 
 export const ThemeContext = createContext();
 
@@ -70,7 +70,7 @@ function App() {
 
         <Routes>
         <Route path="/home" element={<Home updateRecommendations={updateInformation}/>} />
-        <Route path="/saved" element={<Saved5limit savedTrackInfo={information} />} /> 
+        <Route path="/saved" element={<Saved8limit savedTrackInfo={information} />} /> 
         <Route path="/premium" element={<Savedlist savedTrackInfo={information} />} /> 
         <Route path="/tracks" element={<Tracks updateInformation={updateInformation} />} />
         <Route path="/toptracks" element={<Top10Tracks updateTopTracks={updateInformation} />} />
