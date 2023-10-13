@@ -3,7 +3,7 @@ import { Container, Row, Card, Button } from 'react-bootstrap';
 import { ThemeContext } from '../App';
 import { FaMoon, FaSun } from 'react-icons/fa';
 
-function SavedMusic({ savedTrackInfo, savedAlbumInfo, updateTopTracks }) {
+function Saved8limit({ savedTrackInfo, savedAlbumInfo, updateTopTracks, updateRecommendations }) {
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
   document.body.style.backgroundColor = isDarkMode ? '#000' : '#fff';
@@ -97,9 +97,30 @@ function SavedMusic({ savedTrackInfo, savedAlbumInfo, updateTopTracks }) {
               </Card>
             ))}
         </Row>
+        <Row>
+          {updateRecommendations &&
+            updateRecommendations.slice(0, limit).map((track, index) => (
+              <Card
+                className={`tracks-container ${isDarkMode ? 'dark' : 'light'}`}
+                key={index}
+                style={{ width: '18rem' }}
+              >
+                <Card.Img variant="top" src={track.imageUrl} alt={track.name} />
+                <Card.Body>
+                  <Card.Title>{track.name}</Card.Title>
+                  <Card.Text className={isDarkMode ? '' : 'text-dark'}>
+                    Artists: {track.artists}
+                  </Card.Text>
+                  <Card.Text className={isDarkMode ? '' : 'text-dark'}>
+                    Release Date: {track.releaseDate}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            ))}
+        </Row>
       </Container>
     </div>
   );
 }
 
-export default SavedMusic;
+export default Saved8limit;

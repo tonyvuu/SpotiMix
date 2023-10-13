@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Container, Card, Button, Row } from 'react-bootstrap';
-import { FaMoon, FaSun } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import fetchAll from './FetchAPI';
 import { ThemeContext } from '../App';
+import RecommendationsContent from './RecommendationsContent';
 import '../css/Home.css'
 
-function Recommendations() {
+function Home({updateRecommendations}) {
   const [accessToken, setAccessToken] = useState('');
   const [recommendations, setRecommendations] = useState([]);
-  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+  const [savedTracks, setSavedTracks] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
+  const {isDarkMode} = useContext(ThemeContext);
 
   document.body.style.backgroundColor = isDarkMode ? '#000' : '#fff';
 
@@ -47,47 +48,39 @@ function Recommendations() {
     }
   };
 
-  const themeSwitchText = isDarkMode ? 'Dark' : 'Light';
-  const themeSwitchIcon = isDarkMode ? <FaMoon color="#fff" /> : <FaSun color="#000" />;
+  const handleSaveTrack = (track) => {
+    if (savedTracks.find(savedTrack => savedTrack.name === track.name)) {
+      console.log('Track is already saved:', track.name);
+      setErrorMessage({ id: track.id, message: 'Track is already saved.' });
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 10000);
+      return;
+    }
+
+    const trackInfo = {
+      name: track.name,
+      artists: track.artists.map(artist => artist.name).join(', '),
+      releaseDate: track.album.release_date,
+      imageUrl: track.album.images[0].url,
+    };
+
+    updateRecommendations(trackInfo);
+    setSavedTracks([...savedTracks, trackInfo]);
+  };
 
   return (
     <div>
-       <div className="theme-switch-container">
-          <span className="theme-switch-icon" onClick={toggleTheme}>
-            {themeSwitchIcon}
-          </span>
-          <span className={`theme-switch-text ${isDarkMode ? 'text-white' : 'text-dark'}`} onClick={toggleTheme}>
-            {themeSwitchText}
-          </span>
-        </div>
-      <section className={`section-home ${isDarkMode ? 'text-white' : 'text-dark'}`}>
-        <div className='section-home2'>
-        <h1 className='mb-5'>Welcome to Our Music Platform</h1>
-        <p>Uncover the world of music at your fingertips. Our platform offers an extensive music library where you can effortlessly search for your preferred tracks and albums. Dive into the discography of your beloved artists, discovering their top 10 tracks with just a few clicks. The journey through melodies, beats, and rhythms is made simple and enjoyable with our user-friendly interface, ensuring you can navigate through your music choices easily. Enjoy!</p>
-        </div>
-      </section>
-      <Container>
-        <Button className="fetch-button mb-5" onClick={fetchRecommendations}>
-          Click Here for Recommendations
-        </Button>
-      
-      </Container>
-      <Container>
-      <Row className='mx-2 row row-cols-4'>
-            {recommendations.map((track, index) => (
-            <Card className={`tracks-container ${isDarkMode ? 'dark' : 'light'}`} key={index} style={{ width: '18rem' }}>
-            <Card.Img src={track.album.images[0].url} alt={track.name} />
-                <Card.Body>
-                  <Card.Title>{track.name}</Card.Title>
-                  <Card.Text>Artists: {track.artists.map(artist => artist.name).join(', ')}</Card.Text>
-                  <Card.Text>Album: {track.album.name}</Card.Text>
-                </Card.Body>
-              </Card>
-            ))}
-            </Row>
-      </Container>
+      <RecommendationsContent
+        isDarkMode={isDarkMode}
+        recommendations={recommendations}
+        savedTracks={savedTracks}
+        errorMessage={errorMessage}
+        fetchRecommendations={fetchRecommendations}
+        handleSaveTrack={handleSaveTrack}
+      />
     </div>
   );
 }
 
-export default Recommendations;
+export default Home;
