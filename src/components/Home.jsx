@@ -25,7 +25,7 @@ function Home({updateRecommendations}) {
 
   const fetchRecommendations = async () => {
     if (!accessToken) {
-      console.error('Access token not available!');
+      console.error('access token not available');
       return;
     }
 
