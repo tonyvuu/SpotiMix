@@ -71,6 +71,7 @@ function Home({updateRecommendations}) {
 
   return (
     <div>
+      
       <RecommendationsContent
         isDarkMode={isDarkMode}
         recommendations={recommendations}
@@ -79,6 +80,7 @@ function Home({updateRecommendations}) {
         fetchRecommendations={fetchRecommendations}
         handleSaveTrack={handleSaveTrack}
       />
+      
     </div>
   );
 }
