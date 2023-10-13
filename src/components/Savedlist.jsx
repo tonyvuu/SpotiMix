@@ -4,9 +4,9 @@ import { FaMoon, FaSun } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import fetchAll from './FetchAPI';
 import { ThemeContext } from '../App';
-import '../css/Savedlist.css'
+import '../css/Savedlist.css';  
 
-function savedList() {
+function SavedList() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [tracks, setTracks] = useState([]);
@@ -85,7 +85,7 @@ function savedList() {
           {themeSwitchText}
         </span>
       </div>
-      <h1>Welcome to Premium Status</h1>
+      <h1 className={`${isDarkMode ? 'text-white' : 'text-dark'}`}>Welcome to Premium Status</h1>
       <Container>
         <InputGroup size='lg' className={`m-3`}>
           <FormControl
@@ -105,7 +105,10 @@ function savedList() {
       <Container>
         <Row className='mx-2 row row-cols-4'>
           {tracks.map((track, index) => (
-            <Card className={`saved-container ${isDarkMode ? 'dark' : 'light'}`} key={index}>
+            <Card
+              className={`saved-container ${isDarkMode ? 'dark-card' : 'light-card'}`} 
+              key={index}
+            >
               <Card.Img src={track.album.images[0].url} alt={track.name} />
               <Card.Body>
                 <Card.Title>{track.name}</Card.Title>
@@ -122,12 +125,17 @@ function savedList() {
         <h2 className={`${isDarkMode ? 'text-white' : 'text-dark'}`}>Saved Tracks</h2>
         <Row className='mx-2 row row-cols-4'>
           {savedTracks.map((savedTrack, index) => (
-            <Card className={`saved-container ${isDarkMode ? 'dark' : 'light'}`} key={index}>
+            <Card
+              className={`tracks-container ${isDarkMode ? 'dark-card' : 'light-card'}`} 
+              key={index}
+            >
               <Card.Img src={savedTrack.imageUrl} alt={savedTrack.name} />
               <Card.Body>
                 <Card.Title>{savedTrack.name}</Card.Title>
-                <Card.Text>Artists: {savedTrack.artists}</Card.Text>
-                <Card.Text>Release Date: {savedTrack.releaseDate}</Card.Text>
+                <Card.Text className={isDarkMode ? '' : 'text-dark'}>
+                  Artists: {savedTrack.artists}</Card.Text>
+                  <Card.Text className={isDarkMode ? '' : 'text-dark'}>
+                  Release Date: {savedTrack.releaseDate}</Card.Text>
               </Card.Body>
             </Card>
           ))}
@@ -137,4 +145,4 @@ function savedList() {
   );
 }
 
-export default savedList;
+export default SavedList;
