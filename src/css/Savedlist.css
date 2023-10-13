@@ -3,7 +3,11 @@
     height: auto
 }
 
-/* .container{
-    height: auto;
-    width: 10000px;
-} */
+.dark-card {
+    background-color: #333; 
+    color: #fff; 
+  }
+.light-card {
+    background-color: #fff; 
+    color: #000; 
+  }

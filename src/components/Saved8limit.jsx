@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Container, Row, Card, Button } from 'react-bootstrap';
 import { ThemeContext } from '../App';
 import { FaMoon, FaSun } from 'react-icons/fa';
