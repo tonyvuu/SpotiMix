@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import fetchAll from './FetchAPI';
 import { ThemeContext } from '../App';
 
-function FindTracks() {
+function savedList() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [tracks, setTracks] = useState([]);
@@ -67,7 +67,6 @@ function FindTracks() {
         [track.name]: true,
       }));
 
-      // Hide the "Saved successfully" message after a short delay
       setTimeout(() => {
         setShowSavedMessage(prevState => ({
           ...prevState,
@@ -138,4 +137,4 @@ function FindTracks() {
   );
 }
 
-export default FindTracks;
+export default savedList;

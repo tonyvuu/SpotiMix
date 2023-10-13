@@ -69,12 +69,12 @@ function App() {
         </Navbar>
 
         <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Home updateRecommendations={updateInformation}/>} />
         <Route path="/saved" element={<Saved5limit savedTrackInfo={information} />} /> 
         <Route path="/premium" element={<Savedlist savedTrackInfo={information} />} /> 
-        <Route path="/tracks" element={<Tracks information={information} updateInformation={updateInformation} />} />
-        <Route path="/toptracks" element={<Top10Tracks information={information} updateTopTracks={updateInformation} />} />
-        <Route path="/topalbums" element={<TopAlbums information={information} updateAlbum={updateInformation} />} />
+        <Route path="/tracks" element={<Tracks updateInformation={updateInformation} />} />
+        <Route path="/toptracks" element={<Top10Tracks updateTopTracks={updateInformation} />} />
+        <Route path="/topalbums" element={<TopAlbums updateAlbum={updateInformation} />} />
         <Route path="*" element={<Home />} />
       </Routes>
       </div>
