@@ -33,6 +33,7 @@ SpotiMix is a React-based web application that leverages the Spotify API to prov
 ### Technologies Used
 * React: The entire application is built using React, a popular JavaScript library for building user interfaces.
 * React Bootstrap: The UI of the application is designed using React Bootstrap, which provides pre-styled components to enhance the overall user experience.
+* Mamba UI: Free, open source collection of UI elements based on Tailwind CSS that I implemented (volume mixer) on the bottom right for visuals
 * Context API: React's Context API is used to manage and pass the application's theme state to various components, enabling seamless switching between light and dark themes.
 * Spotify API: The Spotify API is utilized to fetch music recommendations, album details, top tracks, and more, allowing users to explore a vast collection of music.
 * React Router: React Router is employed to handle routing within the application, enabling navigation between different pages and components.
