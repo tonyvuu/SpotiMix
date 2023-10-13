@@ -4,6 +4,7 @@ import { FaMoon, FaSun } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import fetchAll from './FetchAPI';
 import { ThemeContext } from '../App';
+import '../css/Savedlist.css'
 
 function savedList() {
   const [searchInput, setSearchInput] = useState("");
@@ -84,6 +85,7 @@ function savedList() {
           {themeSwitchText}
         </span>
       </div>
+      <h1>Welcome to Premium Status</h1>
       <Container>
         <InputGroup size='lg' className={`m-3`}>
           <FormControl
@@ -103,7 +105,7 @@ function savedList() {
       <Container>
         <Row className='mx-2 row row-cols-4'>
           {tracks.map((track, index) => (
-            <Card className={`tracks-container ${isDarkMode ? 'dark' : 'light'}`} key={index}>
+            <Card className={`saved-container ${isDarkMode ? 'dark' : 'light'}`} key={index}>
               <Card.Img src={track.album.images[0].url} alt={track.name} />
               <Card.Body>
                 <Card.Title>{track.name}</Card.Title>
@@ -119,10 +121,8 @@ function savedList() {
       <Container>
         <h2 className={`${isDarkMode ? 'text-white' : 'text-dark'}`}>Saved Tracks</h2>
         <Row className='mx-2 row row-cols-4'>
-         
-
           {savedTracks.map((savedTrack, index) => (
-            <Card className={`tracks-container ${isDarkMode ? 'dark' : 'light'}`} key={index}>
+            <Card className={`saved-container ${isDarkMode ? 'dark' : 'light'}`} key={index}>
               <Card.Img src={savedTrack.imageUrl} alt={savedTrack.name} />
               <Card.Body>
                 <Card.Title>{savedTrack.name}</Card.Title>

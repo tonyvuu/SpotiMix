@@ -11,6 +11,7 @@ function FindTracks({ updateInformation }) {
   const [tracks, setTracks] = useState([]);
   const [savedTracks, setSavedTracks] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
   document.body.style.backgroundColor = isDarkMode ? '#000' : '#fff';
@@ -42,6 +43,11 @@ function FindTracks({ updateInformation }) {
 
     if (data.tracks) {
       setTracks(data.tracks.items);
+      if (data.tracks.items.length === 0) {
+        setShowErrorMessage(true);
+      } else {
+        setShowErrorMessage(false);
+      }
     }
   };
 
@@ -102,18 +108,17 @@ function FindTracks({ updateInformation }) {
                 <Card.Title>{track.name}</Card.Title>
                 <Card.Text>Artists: {track.artists.map(artist => artist.name).join(', ')}</Card.Text>
                 <Card.Text>Release Date: {track.album.release_date}</Card.Text>
-
-
                 {savedTracks.find(savedTrack => savedTrack.name === track.name) && (
                   <div className='success-message'>Saved successfully!</div>
-                  )}
-                  {errorMessage && errorMessage.id === track.id && (
-                    <div className='error-message'>{errorMessage.message}</div>
-                  )}
+                )}
+                {errorMessage && errorMessage.id === track.id && (
+                  <div className='error-message'>{errorMessage.message}</div>
+                )}
               </Card.Body>
               <Button className='save-track-button' onClick={() => handleSaveTrack(track)}>Save Track</Button>
             </Card>
           ))}
+          {showErrorMessage && <div className="no-tracks-message">No tracks found for the search.</div>}
         </Row>
       </Container>
     </div>
